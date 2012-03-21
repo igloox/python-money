@@ -81,6 +81,7 @@ class MoneyField(models.DecimalField):
         if isinstance(default, Money):
             self.default_currency = default.currency
         self.default_currency = default_currency
+        self.null = kwargs.get('null')
         super(MoneyField, self).__init__(verbose_name, name, max_digits, decimal_places, default=default, blank=blank, **kwargs)
 
     def get_internal_type(self):
@@ -105,8 +106,10 @@ class MoneyField(models.DecimalField):
 
     def contribute_to_class(self, cls, name):
         if self.add_currency_field and not cls._meta.abstract:
-            c_field = CurrencyField(max_length=3, default=self.default_currency, editable=False)
-            c_field.creation_counter = self.creation_counter+1
+            c_field = CurrencyField(max_length=3, editable=False,
+									default=self.default_currency,
+									blank=self.null, null=self.null,
+									auto_created=True)
             cls.add_to_class(currency_field_name(name), c_field)
 
         super(MoneyField, self).contribute_to_class(cls, name)
@@ -144,6 +147,8 @@ class MoneyField(models.DecimalField):
 
     def formfield(self, **kwargs):
         defaults = {'form_class': forms.MoneyField}
+        if self.default_currency:
+			defaults['initial'] = Money('', self.default_currency)
         defaults.update(kwargs)
         return super(MoneyField, self).formfield(**defaults)
 

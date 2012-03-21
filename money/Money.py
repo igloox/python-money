@@ -19,10 +19,12 @@ class Currency:
 
     def __repr__(self):
         return self.code
+
     def set_exchange_rate(self, rate):
         if not isinstance(rate, Decimal):
             rate = Decimal(str(rate))
         self.exchange_rate = rate
+
 
 CURRENCY = {}
 CURRENCY['XXX'] = Currency(code="XXX", numeric="999")
@@ -201,14 +203,14 @@ class Money:
 # Symbols: http://www.xe.com/symbols.php
 #
 
-CURRENCY['BZD'] = Currency(code='BZD', numeric='084', name='Belize Dollar', countries=['BELIZE'])
-CURRENCY['YER'] = Currency(code='YER', numeric='886', name='Yemeni Rial', countries=['YEMEN'])
+CURRENCY['BZD'] = Currency(code='BZD', numeric='084', name='Belize Dollar', countries=['BELIZE'], symbol='&#66;&#90;&#36;')
+CURRENCY['YER'] = Currency(code='YER', numeric='886', name='Yemeni Rial', countries=['YEMEN'], symbol='&#65020;')
 CURRENCY['XBA'] = Currency(code='XBA', numeric='955', name='Bond Markets Units European Composite Unit (EURCO)', countries=[])
 CURRENCY['SLL'] = Currency(code='SLL', numeric='694', name='Leone', countries=['SIERRA LEONE'])
 CURRENCY['ERN'] = Currency(code='ERN', numeric='232', name='Nakfa', countries=['ERITREA'])
-CURRENCY['NGN'] = Currency(code='NGN', numeric='566', name='Naira', countries=['NIGERIA'])
-CURRENCY['CRC'] = Currency(code='CRC', numeric='188', name='Costa Rican Colon', countries=['COSTA RICA'])
-CURRENCY['VEF'] = Currency(code='VEF', numeric='937', name='Bolivar Fuerte', countries=['VENEZUELA'])
+CURRENCY['NGN'] = Currency(code='NGN', numeric='566', name='Naira', countries=['NIGERIA'], symbol='&#8358;')
+CURRENCY['CRC'] = Currency(code='CRC', numeric='188', name='Costa Rican Colon', countries=['COSTA RICA'], symbol='&#8353;')
+CURRENCY['VEF'] = Currency(code='VEF', numeric='937', name='Bolivar Fuerte', countries=['VENEZUELA'], symbol='&#66;&#115;')
 CURRENCY['LAK'] = Currency(code='LAK', numeric='418', name='Kip', countries=['LAO PEOPLES DEMOCRATIC REPUBLIC'])
 CURRENCY['DZD'] = Currency(code='DZD', numeric='012', name='Algerian Dinar', countries=['ALGERIA'])
 CURRENCY['SZL'] = Currency(code='SZL', numeric='748', name='Lilangeni', countries=['SWAZILAND'])
@@ -224,7 +226,7 @@ CURRENCY['IDR'] = Currency(code='IDR', numeric='360', name='Rupiah', countries=[
 CURRENCY['XBD'] = Currency(code='XBD', numeric='958', name='European Unit of Account 17(E.U.A.-17)', countries=[])
 CURRENCY['GTQ'] = Currency(code='GTQ', numeric='320', name='Quetzal', countries=['GUATEMALA'])
 CURRENCY['CAD'] = Currency(code='CAD', numeric='124', name='Canadian Dollar', symbol=u"$", decimals=2, countries=['CANADA'])
-CURRENCY['AWG'] = Currency(code='AWG', numeric='533', name='Aruban Guilder', countries=['ARUBA'])
+CURRENCY['AWG'] = Currency(code='AWG', numeric='533', name='Aruban Guilder', countries=['ARUBA'], symbol='&#402;')
 CURRENCY['TTD'] = Currency(code='TTD', numeric='780', name='Trinidad and Tobago Dollar', countries=['TRINIDAD AND TOBAGO'])
 CURRENCY['PKR'] = Currency(code='PKR', numeric='586', name='Pakistan Rupee', countries=['PAKISTAN'])
 CURRENCY['XBC'] = Currency(code='XBC', numeric='957', name='European Unit of Account 9(E.U.A.-9)', countries=[])
@@ -238,9 +240,9 @@ CURRENCY['MNT'] = Currency(code='MNT', numeric='496', name='Tugrik', countries=[
 CURRENCY['ANG'] = Currency(code='ANG', numeric='532', name='Netherlands Antillian Guilder', countries=['NETHERLANDS ANTILLES'])
 CURRENCY['LBP'] = Currency(code='LBP', numeric='422', name='Lebanese Pound', countries=['LEBANON'])
 CURRENCY['KES'] = Currency(code='KES', numeric='404', name='Kenyan Shilling', countries=['KENYA'])
-CURRENCY['GBP'] = Currency(code='GBP', numeric='826', name='Pound Sterling', symbol=u"£", decimals=2, countries=['UNITED KINGDOM'])
+CURRENCY['GBP'] = Currency(code='GBP', numeric='826', name='Pound Sterling', symbol='&#163;', decimals=2, countries=['UNITED KINGDOM'])
 CURRENCY['SEK'] = Currency(code='SEK', numeric='752', name='Swedish Krona', countries=['SWEDEN'])
-CURRENCY['AFN'] = Currency(code='AFN', numeric='971', name='Afghani', countries=['AFGHANISTAN'])
+CURRENCY['AFN'] = Currency(code='AFN', numeric='971', name='Afghani', countries=['AFGHANISTAN'], symbol='&#1547;')
 CURRENCY['KZT'] = Currency(code='KZT', numeric='398', name='Tenge', countries=['KAZAKHSTAN'])
 CURRENCY['ZMK'] = Currency(code='ZMK', numeric='894', name='Kwacha', countries=['ZAMBIA'])
 CURRENCY['SKK'] = Currency(code='SKK', numeric='703', name='Slovak Koruna', countries=['SLOVAKIA'])
@@ -250,7 +252,7 @@ CURRENCY['AMD'] = Currency(code='AMD', numeric='051', name='Armenian Dram', coun
 CURRENCY['SCR'] = Currency(code='SCR', numeric='690', name='Seychelles Rupee', countries=['SEYCHELLES'])
 CURRENCY['FJD'] = Currency(code='FJD', numeric='242', name='Fiji Dollar', countries=['FIJI'])
 CURRENCY['SHP'] = Currency(code='SHP', numeric='654', name='Saint Helena Pound', countries=['SAINT HELENA'])
-CURRENCY['ALL'] = Currency(code='ALL', numeric='008', name='Lek', countries=['ALBANIA'])
+CURRENCY['ALL'] = Currency(code='ALL', numeric='008', name='Lek', countries=['ALBANIA'], symbol='&#76;&#101;&#107;')
 CURRENCY['TOP'] = Currency(code='TOP', numeric='776', name='Paanga', countries=['TONGA'])
 CURRENCY['UGX'] = Currency(code='UGX', numeric='800', name='Uganda Shilling', countries=['UGANDA'])
 CURRENCY['OMR'] = Currency(code='OMR', numeric='512', name='Rial Omani', countries=['OMAN'])
@@ -261,7 +263,7 @@ CURRENCY['SBD'] = Currency(code='SBD', numeric='090', name='Solomon Islands Doll
 CURRENCY['GHS'] = Currency(code='GHS', numeric='936', name='Ghana Cedi', countries=['GHANA'])
 CURRENCY['GNF'] = Currency(code='GNF', numeric='324', name='Guinea Franc', countries=['GUINEA'])
 CURRENCY['CVE'] = Currency(code='CVE', numeric='132', name='Cape Verde Escudo', countries=['CAPE VERDE'])
-CURRENCY['ARS'] = Currency(code='ARS', numeric='032', name='Argentine Peso', countries=['ARGENTINA'])
+CURRENCY['ARS'] = Currency(code='ARS', numeric='032', name='Argentine Peso', countries=['ARGENTINA'], symbol='&#36;')
 CURRENCY['GMD'] = Currency(code='GMD', numeric='270', name='Dalasi', countries=['GAMBIA'])
 CURRENCY['ZWD'] = Currency(code='ZWD', numeric='716', name='Zimbabwe Dollar', countries=['ZIMBABWE'])
 CURRENCY['MWK'] = Currency(code='MWK', numeric='454', name='Kwacha', countries=['MALAWI'])
@@ -274,7 +276,7 @@ CURRENCY['SRD'] = Currency(code='SRD', numeric='968', name='Surinam Dollar', cou
 CURRENCY['DOP'] = Currency(code='DOP', numeric='214', name='Dominican Peso', countries=['DOMINICAN REPUBLIC'])
 CURRENCY['PEN'] = Currency(code='PEN', numeric='604', name='Nuevo Sol', countries=['PERU'])
 CURRENCY['KPW'] = Currency(code='KPW', numeric='408', name='North Korean Won', countries=['KOREA'])
-CURRENCY['SGD'] = Currency(code='SGD', numeric='702', name='Singapore Dollar', countries=['SINGAPORE'])
+CURRENCY['SGD'] = Currency(code='SGD', numeric='702', name='Singapore Dollar', countries=['SINGAPORE'], symbol=u"$")
 CURRENCY['TWD'] = Currency(code='TWD', numeric='901', name='New Taiwan Dollar', countries=['TAIWAN'])
 CURRENCY['USD'] = Currency(code='USD', numeric='840', name='US Dollar', symbol=u"$", decimals=2, countries=['AMERICAN SAMOA', 'BRITISH INDIAN OCEAN TERRITORY', 'ECUADOR', 'GUAM', 'MARSHALL ISLANDS', 'MICRONESIA', 'NORTHERN MARIANA ISLANDS', 'PALAU', 'PUERTO RICO', 'TIMOR-LESTE', 'TURKS AND CAICOS ISLANDS', 'UNITED STATES MINOR OUTLYING ISLANDS', 'VIRGIN ISLANDS (BRITISH)', 'VIRGIN ISLANDS (U.S.)'])
 CURRENCY['BGN'] = Currency(code='BGN', numeric='975', name='Bulgarian Lev', countries=['BULGARIA'])
