@@ -12,7 +12,7 @@ class MoneyField(forms.MultiValueField):
         return u"%s - %s" % (c.code, c.name)
 
     def __init__(self, choices=None, decimal_places=2, max_digits=12,
-                 default_currency=None, *args, **kwargs):
+                 default_currency=None, min_value=None, *args, **kwargs):
         # Note that we catch args and kwargs that must only go to one field
         # or the other. The rest of them pass onto the decimal field.
         choices = choices or list(( (u"%s" % (c.code,), self.label_from_currency(c)) for i, c in sorted(CURRENCY.items()) if c.code != 'XXX'))
@@ -21,6 +21,7 @@ class MoneyField(forms.MultiValueField):
 
         fields = (
             forms.DecimalField(*args, decimal_places=decimal_places,
+                               min_value=min_value,
                                max_digits=max_digits, **kwargs),
             forms.ChoiceField(choices=choices)
         )
