@@ -15,7 +15,7 @@ with open(os.path.join(loc, 'README.md')) as f:
 keywords = 'money currency finance'.split()
 
 tests_require = [
-    'django<1.4',
+    'django<1.5',
     'nose',
     'django_nose',
 ]
