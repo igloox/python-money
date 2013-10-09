@@ -9,7 +9,10 @@ __all__ = ('QuerysetWithMoney', 'MoneyManager',)
 class QuerysetWithMoney(QuerySet):
     
     def _update_params(self, kwargs):
-        from django.db.models.sql.constants import LOOKUP_SEP
+        try:
+            from django.db.models.sql.constants import LOOKUP_SEP
+        except ImportError: # For Django 1.5 and above
+            from django.db.models.constants import LOOKUP_SEP
         from money import Money
         to_append = {}
         for name, value in kwargs.items():
