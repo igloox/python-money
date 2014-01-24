@@ -29,7 +29,7 @@ class Currency:
 		# If a money object gets pickled, its comparison operators might
 		# fail because the pickled currency object might not == the fresh
 		# object. Hurrah!
-		if self.code == other.code:
+		if self.code == getattr(other, 'code', None): # Can't assume 'other' is a money object
 			return True
 
 
