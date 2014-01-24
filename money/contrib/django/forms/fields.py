@@ -2,6 +2,8 @@ from django.utils.translation import ugettext_lazy as _
 from django import forms
 from widgets import CurrencySelectWidget
 from money import Money, CURRENCY
+from money.contrib.django.settings import CURRENCY_LABEL
+
 
 class MoneyField(forms.MultiValueField):
     """
@@ -9,7 +11,7 @@ class MoneyField(forms.MultiValueField):
     """
 
     def label_from_currency(self, c):
-        return u"%s - %s" % (c.code, c.name)
+        return CURRENCY_LABEL % {'code': c.code, 'name': c.name}
 
     def __init__(self, choices=None, decimal_places=2, max_digits=12,
                  default_currency=None, min_value=None, *args, **kwargs):
