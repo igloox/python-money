@@ -2,7 +2,7 @@
 import exceptions
 from decimal import Decimal
 
-class Currency:
+class Currency(object):
 	code = "XXX"
 	country = ""
 	countries = []
@@ -47,7 +47,7 @@ class IncorrectMoneyInputError(exceptions.Exception):
 	def __unicode__(self):
 		return u"Incorrectly formatted monetary input"
 
-class Money:
+class Money(object):
 	amount = Decimal("0.0")
 	currency = DEFAULT_CURRENCY
 	def __init__ (self, amount=Decimal("0.0"), currency=None):
