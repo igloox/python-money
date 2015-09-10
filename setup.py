@@ -2,7 +2,7 @@
 import os
 from setuptools import setup, find_packages
 
-from money.version import get_git_version
+from version import get_git_version
 
 # For help with setuptools, see:
 # http://packages.python.org/distribute/setuptools.html

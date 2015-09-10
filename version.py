@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
-# Author: Douglas Creager <dcreager@dcreager.net>
+# Original Author: Douglas Creager <dcreager@dcreager.net>
 # This file is placed into the public domain.
 # (see http://gist.github.com/300803 )
-
-# Calculates the current version number.  If possible, this is the
-# output of "git describe", modified to conform to the versioning
-# scheme that setuptools uses.  If "git describe" returns an error
-# (most likely because we're in an unpacked copy of a release tarball,
-# rather than in a git working copy), then we fall back on reading the
-# contents of the RELEASE-VERSION file.
+#
+# This verion: Stephen Watkin <ste@smashbang.co.uk
+#
+# This is a simplified version of the original script that generates version
+# numbers along the lines of [tag].[number of additional commits]
+# Provided the tag is numeric, the version number should be pep-440 compliant.
 #
 # To use this script, simply import it your setup.py file, and use the
 # results of get_git_version() as your package version:
@@ -32,21 +31,6 @@
 #
 #   include RELEASE-VERSION
 
-# A note about python version numbers:
-# http://www.python.org/dev/peps/pep-0386/#id18
-# http://docs.python.org/distutils/apiref.html#module-distutils.version
-#
-# N.N[.N]+[{a|b|c|rc}N[.N]+][.postN][.devN]
-#
-# minimum 'N.N'
-# any number of extra '.N' segments
-# 'a' = alpha, 'b' = beta
-# 'c' or 'rc' = release candidate
-
-# first number: major business changes/milestones
-# second number: database changes
-# third number: code changes/patches
-
 __all__ = ("get_git_version")
 
 from subprocess import Popen, PIPE
@@ -58,7 +42,12 @@ def call_git_describe(abbrev=4):
                   stdout=PIPE, stderr=PIPE)
         p.stderr.close()
         line = p.stdout.readlines()[0]
-        return line.strip()
+
+        parts = line.strip().split('-')
+        try:
+            return '%s.%s' % (parts[0], parts[1])
+        except IndexError:
+            return parts[0]
 
     except:
         return None
