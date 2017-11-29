@@ -107,9 +107,9 @@ class MoneyField(models.DecimalField):
     def contribute_to_class(self, cls, name):
         if self.add_currency_field and not cls._meta.abstract:
             c_field = CurrencyField(max_length=3, editable=False,
-									default=self.default_currency,
-									blank=self.null, null=self.null,
-									auto_created=True)
+                                    default=self.default_currency,
+                                    blank=self.null, null=self.null,
+                                    auto_created=True)
             cls.add_to_class(currency_field_name(name), c_field)
 
         super(MoneyField, self).contribute_to_class(cls, name)
@@ -120,8 +120,8 @@ class MoneyField(models.DecimalField):
             cls.add_to_class('objects', MoneyManager())
 
     def get_db_prep_save(self, value, connection, *args, **kwargs):
-		# added 'connection' argument so Django 1.4 doesn't throw
-		# a wobbly.
+        # added 'connection' argument so Django 1.4 doesn't throw
+        # a wobbly.
         if isinstance(value, Money):
             value = value.amount
         return super(MoneyField, self).get_db_prep_save(value, connection, *args, **kwargs)
@@ -134,14 +134,14 @@ class MoneyField(models.DecimalField):
         #
         # value = self.get_db_prep_save(value)
         # return super(MoneyField, self).get_prep_lookup(lookup_type, value)
-       
+
         # But since Django 1.4,
         # get_db_prep_save() needs a `connection` argument, which we don't
         # get passed here. So just replicate the functionality of that
         # method (and hope the subsequent 'super()' call (that we don't
         # call either) doesn't do anything too important. This passes
         # all the current tests, anyway.
-        
+
         if isinstance(value, Money):
             value = value.amount
         return super(MoneyField, self).get_prep_lookup(lookup_type, value)
@@ -164,7 +164,7 @@ class MoneyField(models.DecimalField):
     def formfield(self, **kwargs):
         defaults = {'form_class': forms.MoneyField}
         if self.default_currency:
-			defaults['initial'] = Money('', self.default_currency)
+            defaults['initial'] = Money('', self.default_currency)
         defaults.update(kwargs)
         return super(MoneyField, self).formfield(**defaults)
 
