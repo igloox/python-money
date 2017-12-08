@@ -1,19 +1,16 @@
 from django.db import models
 from django.db.models.query import QuerySet
-from django.utils.encoding import smart_unicode
-from fields import currency_field_name
+from django.utils.encoding import smart_text
+from .fields import currency_field_name
 
 __all__ = ('QuerysetWithMoney', 'MoneyManager',)
 
 
 class QuerysetWithMoney(QuerySet):
-    
+
     def _update_params(self, kwargs):
-        try:
-            from django.db.models.sql.constants import LOOKUP_SEP
-        except ImportError: # For Django 1.5 and above
-            from django.db.models.constants import LOOKUP_SEP
-        from money import Money
+        from django.db.models.constants import LOOKUP_SEP
+        from money.money import Money
         to_append = {}
         for name, value in kwargs.items():
             if isinstance(value, Money):
@@ -22,10 +19,10 @@ class QuerysetWithMoney(QuerySet):
                     field_name = currency_field_name(path[0])
                 else:
                     field_name = currency_field_name(name)
-                to_append[field_name] = smart_unicode(value.currency)
+                to_append[field_name] = smart_text(value.currency)
         kwargs.update(to_append)
         return kwargs
-        
+
     def dates(self, *args, **kwargs):
         kwargs = self._update_params(kwargs)
         return super(QuerysetWithMoney, self).dates(*args, **kwargs)
@@ -84,5 +81,5 @@ class QuerysetWithMoney(QuerySet):
 
 
 class MoneyManager(models.Manager):
-    def get_query_set(self):
+    def get_queryset(self):
         return QuerysetWithMoney(self.model)
